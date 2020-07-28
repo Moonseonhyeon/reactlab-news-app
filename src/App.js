@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    data: {
+      userId: null,
+      id: null,
+      title: null,
+      completed: null,
+    },
+  };
+  onClick = () => {
+    const { data } = this.state;
+
+    Axios.get("https://jsonplaceholder.typicode.com/todos/1").then((resp) => {
+      console.log(resp);
+      this.setState({
+        data: { data, ...resp.data },
+      });
+    });
+    console.log(1);
+    console.log(2);
+    console.log(9999);
+    console.log(10000);
+  };
+
+  render() {
+    const { data } = this.state;
+    return (
+      <div>
+        <div>아이디 : {data.userId}</div>
+        <div>제목: {data.title}</div>
+        <hr></hr>
+        <h1>클릭하세요</h1>
+        <button onClick={this.onClick}>클릭</button>
+      </div>
+    );
+  }
 }
 
 export default App;
