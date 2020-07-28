@@ -10,10 +10,12 @@ class App extends Component {
       completed: null,
     },
   };
-  onClick = () => {
+  onClick = async () => {
     const { data } = this.state;
 
-    Axios.get("https://jsonplaceholder.typicode.com/todos/1").then((resp) => {
+    let resp = await Axios.get(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    ).then((resp) => {
       console.log(resp);
       this.setState({
         data: { data, ...resp.data },
